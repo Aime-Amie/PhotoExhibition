@@ -1,11 +1,26 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryDark">@color/dark_red</item>
+        <item name="colorAccent">@color/red</item>
+
+        <item name="android:windowBackground">@color/soothing_blue</item>
     </style>
 
+    <style name="OvalButtonPhotograph" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_add</item>
+    </style>
+
+    <style name="OvalButtonSave" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_save</item>
+    </style>
+
+    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
 </resources>
