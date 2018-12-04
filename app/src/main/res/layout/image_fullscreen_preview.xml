@@ -6,10 +6,10 @@
     android:background="@android:color/black">
 
     <ImageView
-        android:id="@+id/image_preview_full_screen"
+        android:id="@+id/image_preview_fullscreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:scaleType="fitCenter" />
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY" />
 
 </RelativeLayout>

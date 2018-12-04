@@ -116,17 +116,13 @@ public class SlideShowDialogFragment extends DialogFragment {
             layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.image_fullscreen_preview, container, false);
 
-            ImageView imageViewPreview = view.findViewById(R.id.image_preview_full_screen);
+            ImageView imageViewPreview = view.findViewById(R.id.image_preview_fullscreen);
 
             Photo photo = images.get(position);
 
-//            Glide.with(getActivity()).load(image.getLarge())
-//                    .thumbnail(0.5f)
-//                    .crossFade()
-//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .into(imageViewPreview);
             File photoFile = PhotoLab.get(getActivity()).getPhotoFile(photo);
             Picasso.with(getActivity()).load(photoFile).fit().into(imageViewPreview);
+
 
 
             container.addView(view);

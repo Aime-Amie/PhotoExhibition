@@ -1,8 +1,9 @@
 package ru.uj.photoexhibition.PhotoList;
 
-public interface IPhotoListPresenter {
+import java.io.Serializable;
+
+public interface IPhotoListPresenter extends Serializable {
     void openPhotoAddImage();
-//    void getPhotoList();
     void bindView(IPhotoListView view);
     void unbindView();
 }

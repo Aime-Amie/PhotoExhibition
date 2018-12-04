@@ -53,9 +53,6 @@ public class PhotoAddFragment extends Fragment implements IPhotoAddView {
         if (savedInstanceState == null) {
             mPhotoAddPresenter = new PhotoAddPresenter();
         }
-//        else {
-//            mPhotoAddPresenter = PresenterHolder.getInstance().restorePresenter(savedInstanceState);
-//        }
     }
 
     @Nullable
@@ -120,20 +117,13 @@ public class PhotoAddFragment extends Fragment implements IPhotoAddView {
     private void updatePhotoView() {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mAddSaveImageBatton.setBackgroundResource(R.drawable.button_add);
+            mAddSaveImageBatton.setImageResource(R.drawable.ic_photo_add);
             mImageView.setImageDrawable(null);
         } else {
             mAddSaveImageBatton.setBackgroundResource(R.drawable.button_save);
+            mAddSaveImageBatton.setImageResource(R.drawable.ic_photo_save);
             Picasso.with(getActivity()).load(mPhotoFile).fit().into(mImageView);
         }
-    }
-
-    @Override
-
-    public void onDestroy() {
-
-        super.onDestroy();
-
-
     }
 
     @Override
@@ -147,10 +137,4 @@ public class PhotoAddFragment extends Fragment implements IPhotoAddView {
         mPhotoAddPresenter.unbindView();
         super.onPause();
     }
-
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        PresenterHolder.getInstance().savePresenter((BasePresenter<?>) mPhotoAddPresenter, outState);
-//    }
 }

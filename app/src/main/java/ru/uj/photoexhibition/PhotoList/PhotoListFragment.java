@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.List;
+import java.util.Objects;
 
 import ru.uj.photoexhibition.Adapters.PhotoListAdapter;
 import ru.uj.photoexhibition.DataClasses.Photo;
@@ -51,9 +52,6 @@ public class PhotoListFragment extends Fragment implements IPhotoListView {
         if (savedInstanceState == null) {
             mPhotoListPresenter = new PhotoListPresenter();
         }
-//        else {
-//            mPhotoListPresenter = PresenterHolder.getInstance().restorePresenter(savedInstanceState);
-//        }
 
         setRetainInstance(true);
         setHasOptionsMenu(true);
@@ -84,7 +82,7 @@ public class PhotoListFragment extends Fragment implements IPhotoListView {
         mRecyclerView.addOnItemTouchListener(new PhotoListAdapter.RecyclerTouchListener(getContext(), mRecyclerView, new PhotoListAdapter.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
                 SlideShowDialogFragment newFragment = SlideShowDialogFragment.newInstance(position);
                 newFragment.show(ft, "slideshow");
             }
@@ -99,8 +97,6 @@ public class PhotoListFragment extends Fragment implements IPhotoListView {
         mButtonAddIsEmpty = v.findViewById(R.id.button_empty_list);
         mButtonAddIsEmpty.setOnClickListener(view -> {
             mPhotoListPresenter.openPhotoAddImage();
-//                Intent intent = new Intent(getActivity(), PhotoAddActivity.class);
-//                startActivity(intent);
         });
         return v;
     }
@@ -116,8 +112,6 @@ public class PhotoListFragment extends Fragment implements IPhotoListView {
         switch (item.getItemId()) {
             case R.id.new_image:
                 mPhotoListPresenter.openPhotoAddImage();
-//                Intent intent = new Intent(getActivity(), PhotoAddActivity.class);
-//                startActivity(intent);
                 return true;
                 default:
                     return super.onOptionsItemSelected(item);
@@ -141,54 +135,23 @@ public class PhotoListFragment extends Fragment implements IPhotoListView {
         }
     }
 
-    @Override
-    public void showProgressDialog(String messageToDisplay) {
-        mProgress = new ProgressDialog(getActivity(), R.style.DialogStyle);
-        mProgress.setMessage(messageToDisplay);
-        mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgress.setIndeterminate(true);
-        mProgress.setCancelable(false);
-        mProgress.setProgress(0);
-        mProgress.show();
-    }
-
-    @Override
-    public void hideProgressDialog() {
-        if (mProgress != null) {
-            mProgress.dismiss();
-            mProgress = null;
-        }
-    }
-
-    @Override
-    public void showError(String messageToDisplay) {
-
-    }
-
-//    @Override
-//    public void onGetPhotos(RealmResults<Photo> photos) {
-//        mListAdapter.setPhotoListItems(photos);
-//    }
 
     @Override
     public void showEmptyView() {
         mRecyclerView.setVisibility(View.GONE);
         mLayoutIsEmpty.setVisibility(View.VISIBLE);
-//        mButtonAdd.setVisibility(View.GONE);
     }
 
     @Override
     public void hideEmptyView() {
         mRecyclerView.setVisibility(View.VISIBLE);
         mLayoutIsEmpty.setVisibility(View.GONE);
-//        mButtonAdd.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mPhotoListPresenter.bindView(this);
-//        mPhotoListPresenter.getPhotoList();
         updateUI();
     }
 
@@ -197,16 +160,4 @@ public class PhotoListFragment extends Fragment implements IPhotoListView {
         mPhotoListPresenter.unbindView();
         super.onPause();
     }
-
-    @Override
-    public void onDestroy() {
-
-        super.onDestroy();
-    }
-
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        PresenterHolder.getInstance().savePresenter((BasePresenter<?>) mPhotoListPresenter, outState);
-//    }
 }
